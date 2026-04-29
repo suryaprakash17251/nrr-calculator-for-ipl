@@ -1,0 +1,22 @@
+<body>
+
+    <h2>IPL NRR Calculator</h2>
+
+    <input id="team" placeholder="Team name"><br>
+    <input id="runs_scored" placeholder="Runs scored"><br>
+    <input id="overs_faced" placeholder="Overs faced (19.2)"><br>
+    <input id="runs_conceded" placeholder="Runs conceded"><br>
+    <input id="overs_bowled" placeholder="Overs bowled"><br>
+
+    <button onclick="addMatch()">Add Match</button>
+    <button onclick="getNRR()">Get NRR</button>
+
+    <h3 id="result"></h3>
+
+    <!-- ✅ ADD HERE -->
+    <button onclick="loadTeams()">Show Leaderboard</button>
+    <div id="teams"></div>
+
+    <script src="script.js"></script>
+
+</body>

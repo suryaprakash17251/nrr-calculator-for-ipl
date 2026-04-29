@@ -1,0 +1,92 @@
+const BASE_URL="http://127.0.0.1:5000";
+
+// -----------------------------
+// ADD MATCH
+// -----------------------------
+async function addMatch() {
+    const data= {
+        team: document.getElementById('team').value,
+            runs_scored: parseInt(document.getElementById('runs_scored').value),
+            overs_faced: document.getElementById('overs_faced').value,
+            runs_conceded: parseInt(document.getElementById('runs_conceded').value),
+            overs_bowled: document.getElementById('overs_bowled').value
+    }
+
+    ;
+
+    const res=await fetch(`$ {
+            BASE_URL
+        }
+
+        /add_match`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+
+        ,
+        body: JSON.stringify(data)
+    });
+
+const result=await res.json();
+
+alert(result.message);
+}
+
+
+// -----------------------------
+// GET NRR
+// -----------------------------
+async function getNRR() {
+    const team=document.getElementById('team').value;
+
+    const res=await fetch(`$ {
+            BASE_URL
+        }
+
+        /nrr/$ {
+            team
+        }
+
+        `);
+    const data=await res.json();
+
+    document.getElementById('result').innerText=`NRR: $ {
+        data.NRR
+    }
+
+    | Matches: $ {
+        data.matches
+    }
+
+    `;
+}
+
+
+// -----------------------------
+// GET ALL TEAMS (Leaderboard)
+// -----------------------------
+async function loadTeams() {
+    const res=await fetch(`$ {
+            BASE_URL
+        }
+
+        /teams`);
+    const data=await res.json();
+
+    let html="<h3>Leaderboard</h3>";
+
+    data.forEach(team=> {
+            html +=`<p>$ {
+                team.team
+            }
+
+            → NRR: $ {
+                team.NRR
+            }
+
+            </p>`;
+        });
+
+    document.getElementById('teams').innerHTML=html;
+}
